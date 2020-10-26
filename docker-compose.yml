@@ -1,0 +1,26 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: dev-chellange-nginx
+    ports:
+      - 7000:80
+    volumes: 
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./src:/usr/share/nginx/html
+    links:
+      - php
+  php:
+    build: ./docker/php
+    container_name: dev-chellange-php
+    volumes: 
+      - ./src:/var/www/html
+    links:
+      - mysql
+  mysql:
+    image: mysql
+    container_name: dev-chellange-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
