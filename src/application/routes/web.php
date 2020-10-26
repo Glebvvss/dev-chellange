@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/articles',          [ArticleController::class, 'all']);
+Route::get('/articles/{id}',     [ArticleController::class, 'single']);
+Route::post('/articles',         [ArticleController::class, 'store']);
+Route::post('/duplicate_groups', [ArticleController::class, 'duplicates']);
