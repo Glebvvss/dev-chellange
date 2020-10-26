@@ -17,6 +17,7 @@ services:
       - ./src:/var/www/html
     links:
       - mysql
+      - redis
   mysql:
     image: mysql
     container_name: dev-chellange-mysql
@@ -24,3 +25,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: dev_chellange
+  redis:
+    image: redis
+    container_name: dev-chellange-redis

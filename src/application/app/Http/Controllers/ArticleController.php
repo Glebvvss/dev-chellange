@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Article;
 use Illuminate\Http\Request;
+use App\Jobs\SearchDuplicates;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleController extends Controller
