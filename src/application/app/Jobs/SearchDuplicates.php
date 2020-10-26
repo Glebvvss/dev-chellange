@@ -29,6 +29,6 @@ class SearchDuplicates implements ShouldQueue
      */
     public function handle()
     {
-        //
+        file_put_contents(__DIR__ . '/test.txt', 'test hello world');
     }
 }

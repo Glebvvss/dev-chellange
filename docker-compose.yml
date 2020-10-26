@@ -15,6 +15,7 @@ services:
     container_name: dev-chellange-php
     volumes: 
       - ./src:/var/www/html
+      - ./docker/php/supervisor:/etc/supervisor/conf.d
     links:
       - mysql
       - redis

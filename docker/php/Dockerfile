@@ -2,8 +2,8 @@ FROM php:7.4-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    # apt-get install supervisor -y \
     build-essential \
+    supervisor \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \

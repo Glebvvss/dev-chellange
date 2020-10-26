@@ -18,6 +18,7 @@ class ArticleController extends Controller
 
     public function all()
     {
+        SearchDuplicates::dispatch();
         // find all articles
     }
 
