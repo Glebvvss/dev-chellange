@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateDuplicatesTable extends Migration
 {
@@ -13,9 +13,10 @@ class CreateDuplicatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('duplicates', function (Blueprint $table) {
+        Schema::create('articles_duplicates', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedInteger('original_article_id');
+            $table->unsignedInteger('duplicate_article_id');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateDuplicatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('duplicates');
+        Schema::dropIfExists('articles_duplicates');
     }
 }

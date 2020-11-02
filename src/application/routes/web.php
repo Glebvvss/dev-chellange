@@ -14,7 +14,7 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-Route::get('/articles',          [ArticleController::class, 'all']);
-Route::get('/articles/{id}',     [ArticleController::class, 'single']);
-Route::post('/articles',         [ArticleController::class, 'store']);
-Route::post('/duplicate_groups', [ArticleController::class, 'duplicates']);
+Route::get('/articles',         [ArticleController::class, 'all']);
+Route::get('/articles/{id}',    [ArticleController::class, 'single']);
+Route::post('/articles',        [ArticleController::class, 'store']);
+Route::get('/duplicate_groups', [ArticleController::class, 'duplicates']);

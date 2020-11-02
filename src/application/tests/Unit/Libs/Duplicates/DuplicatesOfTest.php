@@ -62,13 +62,27 @@ class DuplicatesOfTest extends TestCase
     {
         $texts = [new Text('Hello world')];
         $duplicates = new DuplicatesOf(new Text('World hello dear friends'), $texts, 50);
-        $this->assertEquals($duplicates->array(), $texts);
+        $this->assertEquals($duplicates->array(), []);
     }
 
     public function test_arrayMethod_withUniqueLessThenNeeded()
     {
         $texts = [new Text('Hello world')];
         $duplicates = new DuplicatesOf(new Text('World hello test cut'), $texts, 90);
-        $this->assertEquals($duplicates->array(), []);
+        $this->assertEquals($duplicates->array(), $texts);
+    }
+
+    public function test_existsMethod_withExistingDuplicates()
+    {
+        $texts = [new Text('Hello world')];
+        $duplicates = new DuplicatesOf(new Text('Hello world'), $texts, 100);
+        $this->assertTrue($duplicates->exists());
+    }
+
+    public function test_existsMethod_withoutExistingDuplicates()
+    {
+        $texts = [new Text('Hello world')];
+        $duplicates = new DuplicatesOf(new Text('Lorem ipsum'), $texts, 100);
+        $this->assertFalse($duplicates->exists());
     }
 }

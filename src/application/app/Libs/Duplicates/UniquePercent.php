@@ -4,25 +4,22 @@ namespace App\Libs\Duplicates;
 
 class UniquePercent
 {
-    public static function new(array $origMatrix, array $copyMatrix): float
+    public static function between(string $origText, string $copyText): float
     {
-        $words = array_keys($origMatrix + $copyMatrix);
+        $shindleSize = strlen(trim($origText)) < 20 || strlen(trim($copyText) < 20) ? 1 : 3;
+        $shingle1 = Shindles::create($origText, $shindleSize);
+        $shingle2 = Shindles::create($copyText, $shindleSize);
 
-        if (empty($words)) {
-            return 100;
+        if (count($shingle2) > count($shingle1)) {
+            $shingle_tmp = $shingle1;
+            $shingle1 = $shingle2;
+            $shingle2 = $shingle_tmp;
         }
 
-        $comparison = 0;
-        foreach($words as $word) {
-            if (!isset($origMatrix[$word]) || !isset($copyMatrix[$word])) {
-                continue;
-            }
-
-            if ($origMatrix[$word] === $copyMatrix[$word]) {
-                $comparison++;
-            }
+        if (empty($diff = array_diff($shingle1, $shingle2))) {
+            return 0;
         }
 
-        return $comparison / count($words) * 100;
+        return round(count($diff) / count($shingle1) * 100, 2);
     }
 }

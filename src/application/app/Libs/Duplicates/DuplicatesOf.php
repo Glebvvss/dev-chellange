@@ -2,14 +2,14 @@
 
 namespace App\Libs\Duplicates;
 
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class DuplicatesOf
 {
-    private Text  $text;
-    private array $texts;
-    private float $expUnique;
+    private Text   $text;
+    private array  $texts;
+    private float  $expUnique;
+    private ?array $duplicates = null;
 
     public function __construct(Text $text, array $texts, float $expUnique)
     {
@@ -24,12 +24,18 @@ class DuplicatesOf
 
     public function array(): array
     {
-        return array_filter($this->texts, function($text) {
-            $actUnique = UniquePercent::new(
-                Matrix::new($this->text->content()),
-                Matrix::new($text->content())
+        if (is_array($this->duplicates)) return $this->duplicates;
+        return $this->duplicates = array_filter($this->texts, function($text) {
+            $actUnique = UniquePercent::between(
+                $this->text->content(),
+                $text->content()
             );
-            return $actUnique >= $this->expUnique;
+            return $actUnique < $this->expUnique;
         });
+    }
+
+    public function exists(): bool
+    {
+        return count($this->array()) > 0;
     }
 }

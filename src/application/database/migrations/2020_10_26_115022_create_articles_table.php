@@ -16,7 +16,8 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->timestamps();
+            $table->unsignedInteger('is_duplicate')->default(0);
+            $table->unsignedInteger('is_processed')->default(0);
         });
     }
 
